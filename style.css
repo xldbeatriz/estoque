@@ -1,0 +1,125 @@
+:root {
+    --cor-de-fundo : #000000;
+    --cor-secundaria: #0b192c;
+    --cor-primaria: #1e3e62;
+    --cor-destaque: #ff6500;
+    --cor-texto-claro: #ffffff;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-claro);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: var(--cor-destaque);
+    text-align: center;
+}
+
+
+form {
+    background-color: var(--cor-secundaria);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--cor-secundaria);
+}
+
+.campo {
+    margin-bottom: 15px;
+    color: var(--cor-texto-claro);
+    margin: 25px;
+    
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+button[type="submit"] {
+    background-color: var(--cor-destaque);
+    color: var(--cor-texto-claro);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff4500;
+}
+
+
+section {
+    margin: 20px;
+}
+
+
+.lista {
+    margin-top: 20px;
+    background-color: var(--cor-primaria);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+.vermelho {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.amarelo {
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 10px;
+    padding: 2px 6px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
+
+
+
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+}

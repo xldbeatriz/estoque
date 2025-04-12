@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de estoque</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Controle de estoque</h1>
+
+    <section id="cadastro-dentro">
+        <h2>Cadastro dentro</h2>
+        <form id="form-dentro">
+            <div class="campo">
+                <label for="codigo-dentro">Código</label>
+                <input type="text" id="codigo-dentro" required/>
+            </div>
+            <div class="campo">
+                <label for="nome-dentro">Nome do produto</label>
+                <input type="text" id="nome-dentro" required/>
+            </div>
+            <div class="campo">
+                <label for="quantidade-dentro">Quantidade</label>
+                <input type="number" id="quantidade-dentro" required/>
+            </div>
+            <div class="campo">
+                <label for="validade-dentro">Validade</label>
+                <input type="date" id="validade-dentro" required/>
+            </div>
+            <button type="submit">Adicionar ao Estoque dentro</button>
+        </form>
+    </section>
+
+    <section id="cadastro-fora">
+        <h2>Cadastro fora</h2>
+        <form id="form-fora">
+            <div class="campo">
+                <label for="codigo-fora">Código</label>
+                <input type="text" id="codigo-fora" required/>
+            </div>
+            <div class="campo">
+                <label for="nome-fora">Nome do produto</label>
+                <input type="text" id="nome-fora" required/>
+            </div>
+            <div class="campo">
+                <label for="quantidade-fora">Quantidade</label>
+                <input type="number" id="quantidade-fora" required/>
+            </div>
+            <div class="campo">
+                <label for="validade-fora">Validade</label>
+                <input type="date" id="validade-fora" required/>
+            </div>
+            <button type="submit">Adicionar ao Estoque Fora</button>
+        </form>
+    </section>
+    <hr/>
+
+    <section id="resultado-comparacao">
+        <H2>Comparativo dos Estoques</H2>
+
+        <div class="lista" id="ambos">
+            <h3>Produtos em ambos</h3>
+            <ul></ul>
+        </div>
+
+        <div class="lista" id="so-dentro">
+            <h3>Produtos só DENTRO</h3>
+            <ul></ul>
+        </div>
+
+        <div class="lista" id="so-fora">
+            <h3>Produtos só FORA</h3>
+            <ul></ul>
+        </div>
+    </section>
+
+    <script src="script.js"></script>    
+</body>
+</html>
