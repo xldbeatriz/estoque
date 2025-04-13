@@ -9,7 +9,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-de-fundo);
     color: var(--cor-texto-claro);
     margin: 0;
     padding: 0;
@@ -35,7 +35,12 @@ form {
     margin-bottom: 15px;
     color: var(--cor-texto-claro);
     margin: 25px;
-    
+   
+}
+
+.campo button{
+    padding: 5px 10px;
+    font-size: 0.9rem;
 }
 
 label {

@@ -59,7 +59,9 @@ function formatarProduto(produto, origem) {
         <strong>${produto.nome}</strong> | Código: ${produto.codigo || '---'} | 
         Qtde: ${produto.quantidade} | Validade: ${new Date(produto.validade).toLocaleDateString('pt-BR')}
         (${dias} dias restantes)
+        <button onclick="editarProduto('${id}', '${origem}')">✏️ Editar</button>
         <button onclick="apagarProduto('${id}', '${origem}')">🗑 Apagar</button>
+
     </li>`;
 }
 
@@ -71,21 +73,30 @@ function compararEstoques() {
     const codigosFora = estoqueFora.map(p => p.codigo || p.nome);
     const codigosDentro = estoqueDentro.map(p => p.codigo || p.nome);
 
-    estoqueDentro.forEach(prod => {
-        const id = prod.codigo || prod.nome;
-        if (codigosFora.includes(id)) {
-            ambos.push(prod);
+    estoqueDentro.forEach(prodDentro => {
+        const id = prodDentro.codigo || prodDentro.nome;
+        const indexFora = codigosFora.indexOf(id);
+
+        if (indexFora !== -1) {
+            const prodFora = estoqueFora[indexFora];
+            const quantidadeTotal = parseInt(prodDentro.quantidade) + parseInt(prodFora.quantidade);
+
+            ambos.push({
+                ...prodDentro,
+                quantidade: quantidadeTotal
+            });
         } else {
-            soDentro.push(prod);
+            soDentro.push(prodDentro);
         }
     });
 
-    estoqueFora.forEach(prod => {
-        const id = prod.codigo || prod.nome;
+    estoqueFora.forEach(prodFora => {
+        const id = prodFora.codigo || prodFora.nome;
         if (!codigosDentro.includes(id)) {
-            soFora.push(prod);
+            soFora.push(prodFora);
         }
     });
+   
 
     exibirLista('ambos', ambos);
     exibirLista('so-dentro', soDentro);
@@ -126,4 +137,61 @@ function apagarProduto(id, origem) {
 // chamar a função ao carregar
 document.addEventListener('DOMContentLoaded', compararEstoques);
 
+function iniciarLeitor(){
+    const divLeitor = document.getElementById('leitor-codigo');
+    divLeitor.style.display = 'block';
 
+}
+
+Quagga.init({
+    inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: document.querySelector('#leitor-codigo'),
+        constraints: {
+            facingMode: "environment" // câmera traseira
+        },
+    },
+    decoder: {
+        readers: ["ean_reader"] // padrão de código de barras comum
+    }
+}, function (err) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    Quagga.start();
+});
+
+Quagga.onDetected(function(result) {
+    let codigo = result.codeResult.code;
+    document.querySelector('input[name="codigo"]').value = codigo;
+    document.getElementById("codigo-lido").innerText = `Código lido: ${codigo}`;
+    Quagga.stop();
+    divLeitor.style.display = "none";
+});
+
+function editarProduto(id, origem) {
+    const estoque = origem === 'dentro' ? estoqueDentro : estoqueFora;
+    const form = origem === 'dentro' ? formDentro : formFora;
+
+    const index = estoque.findIndex(p => (p.codigo || p.nome) === id);
+    if (index === -1) return alert("Produto não encontrado.");
+
+    const produto = estoque[index];
+
+    // Preenche os campos do formulário
+    form.querySelector(`#codigo-${origem}`).value = produto.codigo;
+    form.querySelector(`#nome-${origem}`).value = produto.nome;
+    form.querySelector(`#quantidade-${origem}`).value = produto.quantidade;
+    form.querySelector(`#validade-${origem}`).value = produto.validade;
+
+    // Remove o produto do array temporariamente
+    estoque.splice(index, 1);
+    localStorage.setItem(origem === 'dentro' ? 'estoqueDentro' : 'estoqueFora', JSON.stringify(estoque));
+
+    // Ao enviar o form, o produto será re-adicionado com as alterações
+    compararEstoques();
+
+
+}
