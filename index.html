@@ -10,19 +10,18 @@
 <body>
     <h1>Controle de estoque</h1>
 
+    <div id="leitor-codigo" style="width: 100%; max-width: 400px; margin: auto; display: none;">
+        <video id="video"></video>
+        <p id="codigo-lido" style="text-align: center; font-weight: bold;"></p>
+    </div>
+
     <section id="cadastro-dentro">
         <h2>Cadastro dentro</h2>
-        <div id="leitor-codigo" style="width: 100%; max-width: 400px; margin: auto; display: none;">
-            <video id="video"></video>
-            <p id="codigo-lido" style="text-align: center; font-weight: bold;"></p>
-        </div>
-          
         <form id="form-dentro">
             <div class="campo">
                 <label for="codigo-dentro">Código</label>
-                <input type="text" id="codigo-dentro" required/>
-                <button type="button" onclick="iniciarLeitor()">📷 Ler Código</button>
-
+                <input type="text" id="codigo-dentro" name="codigo" required/>
+                <button type="button" onclick="iniciarLeitor('codigo-dentro')">📷 Ler Código</button>
             </div>
             <div class="campo">
                 <label for="nome-dentro">Nome do produto</label>
@@ -45,9 +44,8 @@
         <form id="form-fora">
             <div class="campo">
                 <label for="codigo-fora">Código</label>
-                <input type="text" id="codigo-fora" required/>
-                <button type="button" onclick="iniciarLeitor()">📷 Ler Código</button>
-
+                <input type="text" id="codigo-fora" name="codigo" required/>
+                <button type="button" onclick="iniciarLeitor('codigo-fora')">📷 Ler Código</button>
             </div>
             <div class="campo">
                 <label for="nome-fora">Nome do produto</label>
@@ -64,8 +62,8 @@
             <button type="submit">Adicionar ao Estoque Fora</button>
         </form>
     </section>
-    <hr/>
 
+    <hr/>
     <section id="resultado-comparacao">
         <H2>Comparativo dos Estoques</H2>
 
